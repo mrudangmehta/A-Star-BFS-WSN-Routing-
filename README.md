@@ -1,3 +1,137 @@
+**A-Star and Best First Search algorithms for Power Efficient WSN Routing**
+In this work, we have implemented two heuristic function-based algorithms from the AI domain for power-efficient routing in wireless sensor networks. 
+The first algorithm is the A-Star algorithm, and the second is Best-First Search. 
+We have considered the following network scenario.
+
+![image](https://github.com/user-attachments/assets/0e592987-7e97-4add-86ef-1ee222c44a11)
+
+**Illustration of a randomly deployed WSN with a source node (S), current node (C), and destination node (D), 
+showing possible routing paths from S to C and C to D.**
+
+From this network, a source node (S) and a destination node (D) are randomly selected. Since S and D are not within direct communication range, an optimal path must be established through intermediate nodes (C). To achieve this, a base station (BS) is incorporated to execute the proposed algorithms, determining the most energy-efficient path from each source to its destination within the network. Once the base station computes the optimal path, it disseminates this information to the relevant nodes by embedding the paths in packet headers through flooding. This approach ensures that all nodes along the route are aware of the precomputed optimal path, thereby reducing computational overhead and minimizing energy consumption during real-time data transmission.
+
+The following assumptions are considered for the proposed algorithms.
+1.	Each node continuously generates data for transmission, and there is only one base station (BS) in the network.
+2.	The network is static and homogeneous, meaning all nodes have identical configurations, capabilities, and remain stationary.
+3.	Nodes are randomly deployed, with no possibility of battery replacement or recharging.
+4.	Communication occurs over a shared medium, following a standard MAC protocol.
+5.	A non-flow splitting model is used, ensuring that data from a source follows a single path to the destination.
+6.	The network follows a flat topology, without hierarchical clustering.
+
+* Optimal Data Gathering for Maximized Lifetime: The A-Star algorithm is applied to sensor nodes (1 to m) and a base station (b) to find the most efficient data gathering schedule, maximizing the network's lifetime until the first relay node depletes its power.
+
+* Dynamic Route Management by Base Station: The base station computes and broadcasts the routing schedule for each round, dynamically maintaining N optimal routes for efficient data transmission and energy conservation.
+
+* Cost Function for Path Selection: The distance cost function f(n) = g(n) + h(n) is used, where g(n) represents the path cost from the start to the current node, and h(n) is a heuristic estimate of the remaining distance to the base station.
+
+**Calculation of g(n) and h(n):**
+* Admissible Heuristic in Path Estimation: The heuristic function h(n), based on the Euclidean distance, underestimates the actual cost since real paths involve intermediate nodes with varying energy levels, making A-Star's heuristic admissible.
+
+* Tree Structure with OPEN and CLOSED Lists: A-Star maintains a search tree with an OPEN list (priority queue for nodes to be examined) and a CLOSED list (nodes already examined), where each node n tracks f(n) = g(n) + h(n) as an estimate of the best path passing through it.
+
+
+
+
+
+
+![image](https://github.com/user-attachments/assets/b9d6e3dc-f084-4c87-ae69-690ef5b5ed28)
+
+**Heuristic-based path selections from Source (S) to Destination (D), with Best-First Search (dotted), 
+shortest heuristic path (red), and avoided non-optimal path (dark).**
+
+* Next-Hop Selection in A-Star: Among neighboring nodes, the one with the lowest heuristic cost h(n) (blue node) is chosen as the next hop, ensuring a progressive path selection towards the destination based on estimated shortest distance.
+
+* Key Difference Between A-Star and Best-First Search: Both algorithms use OPEN and CLOSED lists, but A-Star considers total cost f(n) = g(n) + h(n), while Best-First Search uses only heuristic cost f(n) = h(n), ignoring the actual path cost.
+
+
+**Algorithm Pseudo code**
+**Algorithm DoAStar()**    
+    Input: Network nodes, connectivity information, battery thresholds
+    Output: Established paths and network lifetime in rounds
+
+    for a ← 0 to 1 do  /* Perform routing twice for bidirectional 
+                          evaluation */
+        node2dst ← GetNodeSrtdDistList(nod2dNew, dstNo)  
+        /* Generate a sorted list of nodes based on their distance to 
+           the destination */
+
+        curNo ← srcNo  /* Initialize source node */
+        closeNods ← {}  /* Closed list to track visited nodes */
+        closeNods.Add(curNo)  /* Add source node to the Closed List
+                                 */
+
+        while true do
+            /* Retrieve neighbor nodes and their distances from the 
+               current node */
+        (srcNeighbors, srcDistances, nbrMx) ← GetNeighborInfo(curNo)
+
+            /* Initialize variables for path selection */
+            ghCostMn ← MaxValue  /* Placeholder for minimum heuristic
+						cost */
+            iMn ← -1  /* Index of the next node in the optimal path 
+				*/
+            fCostMin ← MaxValue  /* Placeholder for minimum f(n) 
+						value */
+
+            /* Iterate through all neighboring nodes */
+            for i ← 0 to nbrMx - 1 do
+                ng1 ← srcNeighbors[i]  /* Select the first neighbor 
+							node */
+
+                /* Validate the neighbor:  
+                   - Exclude nodes already in the Closed List  
+                   - Exclude nodes with depleted battery  
+                   - Exclude destination node (handled separately) */
+                ng ← GetNg(ng1, closeNods)
+                if ng ≥ 0 then
+                    hCost ← node2dst[ng]  /* Heuristic cost: 
+							   estimated distance to 
+							   destination */
+                    gCost ← srcDistances[i]  /* Actual cost from 
+							   source to neighbor */
+
+                    /* Compute f(n) cost:  
+                       - A-Star: f(n) = g(n) + h(n)  
+                       - Best-First Search: f(n) = h(n) (ignores 
+				g(n)) */
+                    fCost ← gCost + hCost  /* A-Star Algorithm */
+                    fCost ← hCost  /* Best-First Search Algorithm */
+
+                    /* Select the neighbor with the lowest f(n) */
+                    if fCostMin > fCost then
+                        fCostMin ← fCost
+                        iMn ← ng  /* Store the optimal next node */
+                    end if
+                end if
+            end for
+
+            /* If no valid next node is found, terminate the search 
+			*/
+            if iMn < 0 then
+                break
+            end if
+
+            /* Add selected node to the Closed List and update the 
+		   current node */
+            closeNods.Add(iMn)
+            curNo ← iMn
+
+            /* If the destination node is reached, terminate the loop 
+			*/
+            if curNo = dstNo then
+                break
+            end if
+        end while
+
+        /* Swap source and destination for bidirectional routing */
+        m ← srcNo
+        srcNo ← dstNo
+        dstNo ← m
+    end for
+**end Algorithm**
+
+**User Guide: Software Usage and Implementation of A-Star and BFS Algorithm in WSN**
+
 ![image](https://github.com/user-attachments/assets/6ac5d174-0091-4b02-bc6a-761a39cdbd13)
 
 
