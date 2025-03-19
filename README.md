@@ -36,6 +36,10 @@
 
 ![Figure4_bfs](https://github.com/user-attachments/assets/e5bf0fcc-4b92-4a1a-b663-73230ecf6af5)
 
+# Quick Start 
+
+![qs_1](https://github.com/user-attachments/assets/937cd200-a97f-48f8-b443-9e6b131ed8d9)
+
 
 # User Guide 
 
