@@ -37,4 +37,22 @@
 ![Figure4_bfs](https://github.com/user-attachments/assets/e5bf0fcc-4b92-4a1a-b663-73230ecf6af5)
 
 
+# User Guide 
+
+
+![help1](https://github.com/user-attachments/assets/06d889a5-c827-4772-9f20-81616283e895)
+
+
+
+
+![help2](https://github.com/user-attachments/assets/653ba739-f55b-4d15-a126-10aede911ae6)
+
+
+
+
+
+
+
+
+
 
