@@ -12,5 +12,29 @@
 
 ![wsnSimulator](https://github.com/user-attachments/assets/cfe69586-ea9f-4797-be73-c23f7a89cd9d)
 
+## Initial Deployment
+
+![Figure1_initialDeployment](https://github.com/user-attachments/assets/808f85d2-108b-4386-a503-1969d14d350d)
+
+
+
+## Execution of A-Star and Best First Search WSN Routing (Without Obstacle)
+![Figure2_ast_bfs](https://github.com/user-attachments/assets/0220ae1b-5093-4af3-86b4-73a76b228d4f)
+
+
+
+## Execution of A-Star WSN Routing (With Obstacle)
+
+
+
+![Figure3_ast](https://github.com/user-attachments/assets/419aa312-b87e-4e41-b0c0-589f85015c7e)
+
+
+## Execution of Best First Search WSN Routing (With Obstacle)
+
+
+
+![Figure4_bfs](https://github.com/user-attachments/assets/e5bf0fcc-4b92-4a1a-b663-73230ecf6af5)
+
 
 
