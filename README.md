@@ -12,6 +12,25 @@
 
 ![wsnSimulator](https://github.com/user-attachments/assets/cfe69586-ea9f-4797-be73-c23f7a89cd9d)
 
+## Important Results
+## Without obstacle
+
+
+![figure5](https://github.com/user-attachments/assets/f2724092-36ee-48ae-b55e-6ef4630b623a)
+
+## With Obstacle
+
+
+
+![figure6](https://github.com/user-attachments/assets/591b2d6d-63ee-4466-bf7f-9b7e16ff5b4a)
+
+
+
+
+
+
+
+
 ## Initial Deployment
 
 ![Figure1_initialDeployment](https://github.com/user-attachments/assets/808f85d2-108b-4386-a503-1969d14d350d)
